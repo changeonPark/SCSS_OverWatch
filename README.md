@@ -410,3 +410,103 @@ span {
 }
 ```
 
+## 데이터 종류
+
+```scss
+$number: 1; //5, 100px, 1em
+$string: bold; // relative, "../images/a.png"
+$color: red; //blue, #FFFF00, rgba(0, 0, 0, 1)
+$boolean: true; // false
+$null: null;
+$list: orange, yellow, royalblue;
+```
+
+## 반복문 @each
+
+```scss
+@each $c in $list {
+    .box {
+        color: $c;
+    }
+}
+
+@each $key, $value in $map {
+    .box-#{$key} {
+        color: $value;
+    }
+}
+```
+
+```css
+.box {
+  color: orange;
+}
+
+.box {
+  color: yellow;
+}
+
+.box {
+  color: royalblue;
+}
+
+.box-o {
+  color: orange;
+}
+
+.box-r {
+  color: royalblue;
+}
+
+.box-y {
+  color: yellow;
+}
+```
+
+## 재활용 @content
+
+```scss
+@mixin left-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    @content;
+}
+
+.container {
+    width: 100px;
+    height: 100px;
+    @include left-top;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    @include left-top { //중괄호 내부의 내용이 @content안으로 삽입
+        bottom: 0;
+        right: 0;
+        margin: auto;
+    }
+}
+```
+
+```css
+.container {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+```
